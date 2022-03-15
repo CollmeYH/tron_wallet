@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.tron.dao.MTransferMapper">
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.example.tron.entity.MTransfer">
+        insert into m_transfer (r_id, address, num, tx_id, status, create_time, flag)
+            value (#{rId}, #{address}, #{num}, #{txId}, #{status}, #{createTime}, #{flag})
+    </insert>
+
+    <update id="updateStatusById">
+        update m_transfer
+        set id = id
+        <if test="status != null">
+            ,status = #{status}
+        </if>
+        <if test="flag != null">
+            ,flag = #{flag}
+        </if>
+        where id = #{id}
+    </update>
+
+    <select id="getTransferByFlag" resultType="com.example.tron.entity.MTransfer">
+        select * from m_transfer where flag = 0 and status != 0
+    </select>
+
+
+</mapper>

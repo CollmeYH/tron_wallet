@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.tron.dao.MCurrencyBlockMapper">
+
+    <select id="findByCurrency" resultType="com.example.tron.entity.MCurrencyBlock">
+        select * from m_currency_block where currency = 'TRX'
+    </select>
+
+    <update id="updateById" parameterType="com.example.tron.entity.MCurrencyBlock">
+        update m_currency_block
+        set current_height = #{currentHeight}
+        where id = #{id}
+    </update>
+
+</mapper>

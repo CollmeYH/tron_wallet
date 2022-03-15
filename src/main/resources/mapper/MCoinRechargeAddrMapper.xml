@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.tron.dao.MCoinRechargeAddrMapper">
+
+    <insert id="insertCoinRechargeAddr" parameterType="com.example.tron.entity.MCoinRechargeAddr">
+        insert into m_coin_recharge_addr (currency, address,private_key, create_time) value (#{currency}, #{address},#{privateKey}, #{createTime})
+    </insert>
+
+    <select id="findAllUsedAddress" resultType="string">
+        SELECT address from m_coin_recharge_addr WHERE currency = 'TRX'
+    </select>
+
+    <select id="getCoinRechargeByAddress" resultType="com.example.tron.entity.MCoinRechargeAddr">
+        SELECT * from m_coin_recharge_addr WHERE currency = 'TRX' AND address = #{address}
+    </select>
+
+</mapper>

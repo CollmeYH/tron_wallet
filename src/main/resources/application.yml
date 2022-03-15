@@ -1,0 +1,94 @@
+# TRX波场地址 提现 兑换用
+trx:
+  # USDT智能合约地址
+  contractAddress: TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t
+  # 归集地址
+  gjAddress: TLZM1nMDffjSL2qn8H8WKgvhP2CoCgMGag
+  # USDT打币地址
+  ownerAddress: TSVMoYwQ6BCvnrKAwcu1skvpAJoQMebofu
+  # USDT打币私钥
+  privateKey: 
+  # apiKey
+  apiKey: 73df8fa1-7664-494c-88c9-5b1585f0ef6d
+  # 手续费 1trx = 1000000 sun
+  feeLimit: 15000000
+
+# 开发环境配置
+server:
+  # 服务器的HTTP端口，默认为8080
+  port: 8090
+  servlet:
+    # 应用的访问路径
+    context-path: /
+  # undertow 配置
+  undertow:
+    # HTTP post内容的最大大小。当值为-1时，默认值为大小是无限的
+    max-http-post-size: -1
+    # 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理
+    # 每块buffer的空间大小,越小的空间被利用越充分
+    buffer-size: 512
+    # 是否分配的直接内存
+    direct-buffers: true
+    threads:
+      # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+      io: 8
+      # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统的负载
+      worker: 256
+
+# 日志
+logging:
+  level:
+    com.example.tron: debug
+    org.springframework: warn
+  config: classpath:logback.xml
+
+spring:
+  devtools:
+    restart:
+      # 热部署
+      enabled: true
+  # mysql
+  datasource:
+    url: jdbc:mysql://localhost:3306/tron_wallet?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true
+    username: root
+    password: 8888
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    dbcp2:
+      initial-size: 5                            # ??????
+      min-idle: 10                                # ??????????????
+      max-total: 20                               # ?????
+      max-wait-millis: 1500                       # ?????????????
+  # redis
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 3
+    password: 123456
+    database: 0
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.example.tron.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+# 全局线程池相关配置
+thread-pool:
+  # 是否开启线程池
+  enabled: false
+  # 核心线程池大小
+  corePoolSize: 8
+  # 最大可创建的线程数
+  maxPoolSize: 16
+  # 队列最大长度
+  queueCapacity: 128
+  # 线程池维护线程所允许的空闲时间
+  keepAliveSeconds: 300
+  # 线程池对拒绝任务(无线程可用)的处理策略
+  # CallerRunsPolicy 等待
+  # DiscardOldestPolicy 放弃最旧的
+  # DiscardPolicy 丢弃
+  # AbortPolicy 中止
+  rejectedExecutionHandler: CallerRunsPolicy

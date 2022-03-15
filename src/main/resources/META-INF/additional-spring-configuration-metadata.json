@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "spring.redis.pool.minIdle",
+      "type": "java.lang.String",
+      "description": "Description for spring.redis.pool.minIdle."
+  }
+] }
